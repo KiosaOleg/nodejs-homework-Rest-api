@@ -3,15 +3,17 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const id = uuidv4();
 
+const { Contact } = require("../schemas");
+
 const contactsFilePath = path.resolve(__dirname, "contacts.json");
 
 const updateContacts = async (list) => {
   await fs.writeFile(contactsFilePath, JSON.stringify(list, null, "\t"));
 };
 
-const listContacts = async () => {
-  const data = await fs.readFile(contactsFilePath, "utf-8");
-  return JSON.parse(data);
+const listContacts = async (req, res) => {
+  const contacts = await Contact.find({});
+  res.json(contacts);
 };
 
 const getContactById = async (contactId) => {

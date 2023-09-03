@@ -6,9 +6,12 @@ const contactsController = require("../../controlers/contactsController");
 
 const { validation, ctrlWrapper } = require("../../middlewares");
 
-const { contactsSchema } = require("../../schemas");
+const { contactsSchema, statusSchema } = require("../../schemas");
 
 const validateMiddleware = validation(contactsSchema);
+
+// const updateValidateMiddleware = validation(updateSchema);
+const updateFavoriteMiddleware = validation(statusSchema);
 
 router.get("/", ctrlWrapper(contactsController.getContacts));
 
@@ -25,7 +28,15 @@ router.delete("/:contactId", ctrlWrapper(contactsController.deleteContact));
 router.put(
   "/:contactId",
   validateMiddleware,
+  // updateValidateMiddleware,
   ctrlWrapper(contactsController.updateExistingContact)
+);
+
+router.patch(
+  "/:contactId",
+  // validateMiddleware,
+  updateFavoriteMiddleware,
+  ctrlWrapper(contactsController.updateContactFavourite)
 );
 
 module.exports = router;
