@@ -10,7 +10,7 @@ const getContact = async (req, res, _) => {
   const { contactId } = req.params;
   const contact = await Contact.findById(contactId);
   if (!contact) {
-    throw new NotFound(404, "Not found");
+    throw new NotFound("Not found");
   }
   res.status(200).json(contact);
 };
