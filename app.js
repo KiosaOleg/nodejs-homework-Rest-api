@@ -3,6 +3,8 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const contactsRouter = require("./routes/api/contacts");
+const userRouter = require("./routes/api/user");
+const registerRouter = require("./routes/api/auth");
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
+app.use("/users", userRouter);
+app.use("/users", registerRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((req, res) => {

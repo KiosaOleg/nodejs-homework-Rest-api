@@ -1,8 +1,15 @@
-const { Contact } = require("../schemas/mongoSchemaAndModel");
+const { Contact } = require("../../schemas/mongoSchemaAndModel");
 const { NotFound } = require("http-errors");
 
-const getContacts = async (__, res, _) => {
-  const result = await Contact.find();
+const getContacts = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { page = 1, limit = 10, favorite = null } = req.query;
+  const skip = (page - 1) * limit;
+  const filter = favorite ? { owner, favorite } : { owner };
+  const result = await Contact.find(filter, null, { skip, limit }).populate(
+    "owner",
+    "email subscription"
+  );
   res.status(200).json(result);
 };
 
@@ -16,7 +23,8 @@ const getContact = async (req, res, _) => {
 };
 
 const createContact = async (req, res, _) => {
-  const contact = await Contact.create(req.body);
+  const { _id: owner } = req.user;
+  const contact = await Contact.create({ ...req.body, owner });
   res.status(201).json(contact);
 };
 
