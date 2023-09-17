@@ -24,7 +24,7 @@ const deleteContact = async (req, res, _) => {
   const { contactId } = req.params;
   const result = await Contact.findByIdAndRemove(contactId);
   if (!result) {
-    throw new NotFound(404, "Not found");
+    throw new NotFound("Not found");
   }
   res.status(200).json({ message: "Contact deleted successfully" });
 };
@@ -35,7 +35,7 @@ const updateExistingContact = async (req, res, _) => {
     new: true,
   });
   if (!result) {
-    throw new NotFound(404, "Not found");
+    throw new NotFound("Not found");
   }
   res.status(200).json(result);
 };
@@ -46,7 +46,7 @@ const updateContactFavourite = async (req, res, _) => {
     new: true,
   });
   if (!result) {
-    throw new NotFound(404, "Not found");
+    throw new NotFound("Not found");
   }
   res.status(200).json(result);
 };
