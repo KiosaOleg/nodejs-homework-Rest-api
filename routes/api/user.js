@@ -1,7 +1,9 @@
 const express = require("express");
 
-const { auth, upload, ctrlWrapper } = require("../../middlewares");
+const { auth, upload, validation, ctrlWrapper } = require("../../middlewares");
 const { user: ctrl } = require("../../controlers");
+const { verifyEmailSchema } = require("../../schemas");
+const middlewareVerifyEmailSchema = validation(verifyEmailSchema);
 
 const router = express.Router();
 
@@ -11,6 +13,13 @@ router.patch(
   auth,
   upload.single("avatar"),
   ctrlWrapper(ctrl.updateAvatar)
+);
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+router.post(
+  "/verify",
+  middlewareVerifyEmailSchema,
+  ctrlWrapper(ctrl.resendVerifyEmail)
 );
 
 module.exports = router;

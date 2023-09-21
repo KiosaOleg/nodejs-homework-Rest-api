@@ -1,11 +1,11 @@
 const contactsSchema = require("./contacts");
 const Contact = require("./mongoSchemaAndModel");
 const statusSchema = require("./statusFavoriteSchema");
-// const updateSchema = require("./updateContact");
+const verifyEmailSchema = require("./verifyEmailSchema");
 
 module.exports = {
   contactsSchema,
   Contact,
   statusSchema,
-  // updateSchema,
+  verifyEmailSchema,
 };
