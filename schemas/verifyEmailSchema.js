@@ -4,4 +4,4 @@ const verifyEmailSchema = Joi.object({
   email: Joi.string().required(),
 });
 
-module.exports = { verifyEmailSchema };
+module.exports = verifyEmailSchema;

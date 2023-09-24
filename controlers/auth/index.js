@@ -1,6 +1,6 @@
 const register = require("./register");
 const login = require("./login");
 const logout = require("./logout");
-const resendVerifyEmail = require("./resendVerifyEmail");
+// const resendVerifyEmail = require("../users/resendVerifyEmail");
 
-module.exports = { register, login, logout, resendVerifyEmail };
+module.exports = { register, login, logout };
