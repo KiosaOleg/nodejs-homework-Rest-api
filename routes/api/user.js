@@ -2,7 +2,7 @@ const express = require("express");
 
 const { auth, upload, validation, ctrlWrapper } = require("../../middlewares");
 const { user: ctrl } = require("../../controlers");
-const { verifyEmailSchema } = require("../../schemas");
+const { verifyEmailSchema } = require("../../schemas/verifyEmailSchema");
 const middlewareVerifyEmailSchema = validation(verifyEmailSchema);
 
 const router = express.Router();
