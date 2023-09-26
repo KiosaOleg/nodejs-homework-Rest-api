@@ -31,12 +31,10 @@ const register = async (req, res) => {
   await sendEmail(mail);
 
   res.status(201).json({
-    RequestBody: {
-      email,
-      subscription: "starter",
-      avatarURL,
-      verificationToken,
-    },
+    email,
+    subscription: "starter",
+    avatarURL,
+    verificationToken,
   });
   console.log(`user ${email}, successfully created!`);
 };
